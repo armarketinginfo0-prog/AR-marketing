@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AR Marketing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --gold: #F1C27D;
+        --bg: #0f0f17;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: #fff;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        scroll-behavior: smooth;
+      }
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(33,33,33,.95);
+        backdrop-filter: blur(6px);
+        padding: 1rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        font-weight: 700;
+      }
+      .logo img {
+        height: 56px;
+        width: 56px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--gold);
+      }
+      .logo span {
+        font-size: 1.5rem;
+        color: var(--gold);
+      }
+      .nav-links {
+        display: flex;
+        gap: 1.25rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-links a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: 600;
+        padding: 6px 4px;
+        transition: color .25s;
+      }
+      .nav-links a:hover {
+        color: var(--gold);
+      }
+      .section {
+        padding: 100px 16px 60px;
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 85px !important;
+        margin: 0 0 16px;
+        font-weight: 800;
+        line-height: 1.05;
+        color: var(--gold);
+      }
+      h2 {
+        font-size: 60px !important;
+        margin: 0 0 12px;
+        font-weight: 700;
+        color: var(--gold);
+        position: relative;
+      }
+      h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 3px;
+        margin: 14px auto 0;
+      }
+      h3 {
+        font-size: 42px !important;
+        margin: 0 0 8px;
+        font-weight: 600;
+        color: var(--gold);
+      }
+      p {
+        font-size: 20px !important;
+        margin: 0 0 14px;
+        line-height: 1.4;
+      }
+      .btn {
+        display: inline-block;
+        background: var(--gold);
+        color: #000;
+        font-weight: 700;
+        padding: 14px 28px;
+        border-radius: 999px;
+        text-decoration: none;
+        transition: transform .2s, filter .2s;
+        font-size: 1rem;
+      }
+      .btn:hover {
+        filter: brightness(1.05);
+        transform: scale(1.02);
+      }
+      .hero {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .hero-text {
+        flex: 1 1 400px;
+        min-width: 280px;
+      }
+      .hero-img {
+        flex: 1 1 400px;
+        min-width: 280px;
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 30px 60px -10px rgba(241,194,125,.4);
+        transition: transform .3s;
+      }
+      .hero-img img {
+        width: 100%;
+        display: block;
+        border-radius: 16px;
+      }
+      .hero-img:hover {
+        transform: translateY(-4px);
+      }
+      .cards {
+        display: grid;
+        gap: 30px;
+        margin-top: 50px;
+      }
+      .cards-2 {
+        grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+      }
+      .gradient-card {
+        position: relative;
+        background: linear-gradient(135deg, rgba(241,194,125,0.08) 0%, rgba(28,28,28,0.85) 80%);
+        border: 1px solid rgba(241,194,125,0.6);
+        border-radius: 16px;
+        padding: 32px 28px;
+        box-shadow: 0 35px 80px -5px rgba(241,194,125,0.25), inset 0 0 40px rgba(255,255,255,0.02);
+        transition: transform .3s ease, box-shadow .3s ease;
+        overflow: hidden;
+      }
+      .gradient-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at top left, rgba(241,194,125,0.15), transparent 60%);
+        mix-blend-mode: overlay;
+        pointer-events: none;
+      }
+      .gradient-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 45px 100px -5px rgba(241,194,125,.35), inset 0 0 50px rgba(255,255,255,0.04);
+      }
+      .gradient-card h3 {
+        margin-bottom: 10px;
+        font-size: 42px !important;
+        color: var(--gold);
+      }
+      .gradient-card p {
+        font-size: 20px !important;
+        color: #fff;
+        line-height: 1.4;
+      }
+      .subsection {
+        max-width: 900px;
+        margin: 0 auto;
+      }
+      .form-wrapper {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      form {
+        background: #1f1f2f;
+        padding: 28px 24px;
+        border-radius: 16px;
+        display: grid;
+        gap: 16px;
+        border: 1px solid rgba(241,194,125,.2);
+        box-shadow: 0 35px 90px -10px rgba(0,0,0,.6);
+      }
+      label {
+        font-weight: 600;
+        display: block;
+        margin-bottom: 6px;
+        font-size: 1rem;
+      }
+      input, textarea {
+        background: #0f0f17;
+        border: 1px solid rgba(255,255,255,.08);
+        padding: 14px 16px;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 1rem;
+        resize: vertical;
+        width: 100%;
+      }
+      .submit {
+        background: var(--gold);
+        border: none;
+        padding: 16px;
+        font-weight: 700;
+        font-size: 1rem;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: filter .2s, transform .2s;
+        width: 100%;
+      }
+      .submit:hover {
+        filter: brightness(1.1);
+        transform: translateY(-1px);
+      }
+      @media (max-width: 1000px) {
+        h1 { font-size: 64px !important; }
+        h2 { font-size: 46px !important; }
+        h3 { font-size: 30px !important; }
+        p { font-size: 18px !important; }
+        .cards-2 { grid-template-columns: 1fr; }
+        .hero { flex-direction: column-reverse; }
+      }
+      .cursor-circle {
+        position: fixed;
+        pointer-events: none;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+        background: rgba(241,194,125,.5);
+        width: 16px;
+        height: 16px;
+        transition: transform .1s ease-out;
+        z-index: 999;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="cursor" class="cursor-circle"></div>
+
+    <!-- Navbar -->
+    <nav>
+      <div style="display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:0 auto; width:100%;">
+        <div class="logo">
+          <img src="logo.png.png" alt="Logo" />
+          <span>AR Marketing</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#contact">Contact Now</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Page 1 -->
+    <section id="home" class="section">
+      <div class="hero">
+        <div class="hero-text">
+          <h1>More growth.<br/>More clients.<br/>Guaranteed.</h1>
+          <p style="margin-top:8px;">You do what you are best at, we will handle the marketing.</p>
+          <div style="margin-top:16px;">
+            <a href="#contact" class="btn">Start Now</a>
+          </div>
+        </div>
+        <div class="hero-img">
+          <img src="hero-image.jpg.png" alt="Hero Image" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 2 -->
+    <section class="section" id="page2">
+      <div class="subsection text-center">
+        <h2>So How Do You Get The Most Out Of Your Marketing?</h2>
+        <div class="cards cards-2" style="margin-top:32px;">
+          <div class="gradient-card">
+            <h3>Do everything by yourself?</h3>
+            <p>If you have little to do, it's not a problem. But you have your business to run, right?</p>
+          </div>
+          <div class="gradient-card">
+            <h3>Hire new staff?</h3>
+            <p>Finding good people is difficult, training them is expensive. Even if you find the perfect person... You still rely on one individual.</p>
+          </div>
+        </div>
+        <div class="gradient-card" style="margin:48px auto; max-width:850px;">
+          <h3>Hire an agency?</h3>
+          <p>Don't have a marketing budget of tens of thousands of rupees? Well then your account is managed by the intern assistant of the assistant. Not ideal.</p>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="#contact" class="btn">Start Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Page 3 -->
+    <section class="section" id="page3">
+      <div class="subsection text-center">
+        <h2>Ok... But What Makes You Different?</h2>
+        <div class="cards cards-2" style="margin-top:32px;">
+          <div class="gradient-card">
+            <h3>Guaranteed</h3>
+            <p>We only win if you win. That's the basic of good partnership. You won't carry all the risk. We'll share it.</p>
+          </div>
+          <div class="gradient-card">
+            <h3>Result</h3>
+            <p>Our first priority is to get you results. Less talk more walk.</p>
+          </div>
+          <div class="gradient-card">
+            <h3>Local</h3>
+            <p>We are not some tucked away in some anonymous call centre. We're a local company, so you'll be able to reach us when you need us.</p>
+          </div>
+          <div class="gradient-card">
+            <h3>Specialization</h3>
+            <p>Jack of all trades... Master of none. Specialization works. That's why we work with industries we know, so we can guarantee result.</p>
+          </div>
+        </div>
+        <div style="margin-top:24px;">
+          <a href="#contact" class="btn">Start Now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section" id="contact">
+      <div class="subsection text-center">
+        <h2>Let’s Talk</h2>
+      </div>
+      <div class="form-wrapper" style="margin-top:16px;">
+        <form action="https://formspree.io/f/mvgqqqab" method="POST">
+          <div>
+            <label>Name</label>
+            <input type="text" name="name" placeholder="Your Name" required />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="tel" name="phone" placeholder="Your Phone Number" />
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea name="message" rows="5" placeholder="Tell us about your project"></textarea>
+          </div>
+          <div>
+            <button type="submit" class="submit">Send Message</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <script>
+      // custom cursor
+      const cursor = document.getElementById('cursor');
+      document.addEventListener('mousemove', e => {
+        if (cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
+      });
+      // reveal on scroll
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.style.opacity = 1;
+          }
+        });
+      }, { threshold: 0.25 });
+      document.querySelectorAll('h1, h2, .gradient-card, .hero-text, .hero-img, form').forEach(el => {
+        el.style.opacity = 0;
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
