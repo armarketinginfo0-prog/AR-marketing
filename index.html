@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,6 +9,7 @@
       :root {
         --gold: #F1C27D;
         --bg: #0f0f17;
+        --nav-btn-bg: #FFD700;
       }
       * { box-sizing: border-box; }
       body {
@@ -56,13 +57,16 @@
       }
       .nav-links a {
         text-decoration: none;
-        color: #fff;
+        color: #000;
         font-weight: 600;
-        padding: 6px 4px;
-        transition: color .25s;
+        padding: 8px 16px;
+        background: var(--nav-btn-bg);
+        border-radius: 6px;
+        transition: background .25s, transform .25s;
       }
       .nav-links a:hover {
-        color: var(--gold);
+        background: #e6c200;
+        transform: translateY(-2px);
       }
       .section {
         padding: 100px 16px 60px;
@@ -242,22 +246,9 @@
         .cards-2 { grid-template-columns: 1fr; }
         .hero { flex-direction: column-reverse; }
       }
-      .cursor-circle {
-        position: fixed;
-        pointer-events: none;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        mix-blend-mode: difference;
-        background: rgba(241,194,125,.5);
-        width: 16px;
-        height: 16px;
-        transition: transform .1s ease-out;
-        z-index: 999;
-      }
     </style>
   </head>
   <body>
-    <div id="cursor" class="cursor-circle"></div>
 
     <!-- Navbar -->
     <nav>
@@ -344,7 +335,9 @@
     <!-- Contact -->
     <section class="section" id="contact">
       <div class="subsection text-center">
-        <h2>Let’s Talk</h2>
+        <h2>Get A Free Marketing Analysis.</h2>
+        <h3>Want to know what we can do for you?</h3>
+        <p>Fill out the form below and we will contact you within 48 hrs for a free analysis. No cost, no annoying sales pitch.</p>
       </div>
       <div class="form-wrapper" style="margin-top:16px;">
         <form action="https://formspree.io/f/mvgqqqab" method="POST">
@@ -372,11 +365,6 @@
     </section>
 
     <script>
-      // custom cursor
-      const cursor = document.getElementById('cursor');
-      document.addEventListener('mousemove', e => {
-        if (cursor) cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) scale(1)`;
-      });
       // reveal on scroll
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
