@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thank You - AR Marketing</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --gold: #F1C27D;
+      --bg: #0f0f17;
+    }
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      background: rgba(255,255,255,0.05);
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(241,194,125,0.4);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    h1 {
+      font-size: 48px;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    p {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 999px;
+      text-decoration: none;
+      transition: transform 0.2s, filter 0.2s;
+      font-size: 1rem;
+    }
+    .btn:hover {
+      filter: brightness(1.05);
+      transform: scale(1.02);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Thank You!</h1>
+    <p>Your message has been sent successfully.</p>
+    <p>We will contact you within 48 hrs.</p>
+    <a href="index.html" class="btn">Back to Home</a>
+  </div>
+
+  <script>
+    // Auto-redirect to homepage after 5 seconds
+    setTimeout(function(){
+      window.location.href = "index.html";
+    }, 5000);
+  </script>
+</body>
+</html>
