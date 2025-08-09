@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -60,13 +60,17 @@
         color: #000;
         font-weight: 600;
         padding: 8px 16px;
-        background: var(--nav-btn-bg);
-        border-radius: 6px;
-        transition: background .25s, transform .25s;
+        background-color: var(--nav-btn-bg) !important;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        position: relative;
+        z-index: 1;
+        transition: background 0.25s, transform 0.25s, box-shadow 0.25s;
       }
       .nav-links a:hover {
-        background: #e6c200;
+        background-color: #e6c200 !important;
         transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
       }
       .section {
         padding: 100px 16px 60px;
@@ -158,6 +162,16 @@
       .cards-2 {
         grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
       }
+      /* Page 3 specific 2×2 grid */
+      #page3 .cards-2 {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+      @media (max-width: 600px) {
+        #page3 .cards-2 {
+          grid-template-columns: 1fr;
+        }
+      }
       .gradient-card {
         position: relative;
         background: linear-gradient(135deg, rgba(241,194,125,0.08) 0%, rgba(28,28,28,0.85) 80%);
@@ -179,16 +193,6 @@
       .gradient-card:hover {
         transform: translateY(-4px);
         box-shadow: 0 45px 100px -5px rgba(241,194,125,.35), inset 0 0 50px rgba(255,255,255,0.04);
-      }
-      .gradient-card h3 {
-        margin-bottom: 10px;
-        font-size: 42px !important;
-        color: var(--gold);
-      }
-      .gradient-card p {
-        font-size: 20px !important;
-        color: #fff;
-        line-height: 1.4;
       }
       .subsection {
         max-width: 900px;
@@ -279,7 +283,6 @@
         </div>
       </div>
     </section>
-
     <!-- Page 2 -->
     <section class="section" id="page2">
       <div class="subsection text-center">
@@ -319,11 +322,11 @@
           </div>
           <div class="gradient-card">
             <h3>Local</h3>
-            <p>We are not some tucked away in some anonymous call centre. We're a local company, so you'll be able to reach us when you need us.</p>
+            <p>We are not tucked away in some anonymous call centre. We're a local company, so you'll be able to reach us when you need us.</p>
           </div>
           <div class="gradient-card">
             <h3>Specialization</h3>
-            <p>Jack of all trades... Master of none. Specialization works. That's why we work with industries we know, so we can guarantee result.</p>
+            <p>Jack of all trades... Master of none. Specialization works. That's why we work with industries we know, so we can guarantee results.</p>
           </div>
         </div>
         <div style="margin-top:24px;">
@@ -340,22 +343,22 @@
         <p>Fill out the form below and we will contact you within 48 hrs for a free analysis. No cost, no annoying sales pitch.</p>
       </div>
       <div class="form-wrapper" style="margin-top:16px;">
-        <form action="https://formspree.io/f/mvgqqqab" method="POST">
+        <form id="brevo-form">
           <div>
             <label>Name</label>
-            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="text" name="FIRSTNAME" placeholder="Your Name" required />
           </div>
           <div>
             <label>Email</label>
-            <input type="email" name="email" placeholder="Your Email" required />
+            <input type="email" name="EMAIL" placeholder="Your Email" required />
           </div>
           <div>
             <label>Phone</label>
-            <input type="tel" name="phone" placeholder="Your Phone Number" />
+            <input type="tel" name="PHONE" placeholder="Your Phone Number" />
           </div>
           <div>
             <label>Message</label>
-            <textarea name="message" rows="5" placeholder="Tell us about your project"></textarea>
+            <textarea name="MESSAGE" rows="5" placeholder="Tell us about your project"></textarea>
           </div>
           <div>
             <button type="submit" class="submit">Send Message</button>
@@ -365,7 +368,7 @@
     </section>
 
     <script>
-      // reveal on scroll
+      // Reveal on scroll
       const observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {
@@ -376,6 +379,38 @@
       document.querySelectorAll('h1, h2, .gradient-card, .hero-text, .hero-img, form').forEach(el => {
         el.style.opacity = 0;
         observer.observe(el);
+      });
+
+      // Brevo API form submission
+      document.getElementById('brevo-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const data = {
+          updateEnabled: false,
+          email: e.target.EMAIL.value,
+          attributes: {
+            FIRSTNAME: e.target.FIRSTNAME.value,
+            PHONE: e.target.PHONE.value,
+            MESSAGE: e.target.MESSAGE.value
+          },
+          listIds: [3] // Your Brevo list ID
+        };
+
+        const response = await fetch("https://api.brevo.com/v3/contacts", {
+          method: "POST",
+          headers: {
+            "accept": "application/json",
+            "api-key": "YOUR_BREVO_API_KEY",
+            "content-type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          window.location.href = "thank-you.html";
+        } else {
+          alert("Error submitting form. Please try again.");
+        }
       });
     </script>
   </body>
