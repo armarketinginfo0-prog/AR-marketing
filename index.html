@@ -334,8 +334,7 @@
         </div>
       </div>
     </section>
-
-    <!-- Contact -->
+	    <!-- Contact -->
     <section class="section" id="contact">
       <div class="subsection text-center">
         <h2>Get A Free Marketing Analysis.</h2>
@@ -343,7 +342,8 @@
         <p>Fill out the form below and we will contact you within 48 hrs for a free analysis. No cost, no annoying sales pitch.</p>
       </div>
       <div class="form-wrapper" style="margin-top:16px;">
-        <form id="brevo-form">
+        <form action="https://660405e6.sibforms.com/serve/MUIFACPJM3r0Fy9ScknYxZEx-sivDTLGp7XqePDUvzRgmMeXB2GJx8EPrgH98It8nuNpkikBA3KJJIF3kEPeAbiO97JDw49MrfB86aBzme1y5gEvOPdcf9xxtX0dto1AEG5CBfXPD4W-nv1RxKm9hS-pWXsx70rIV1Y936fzh_zAh9JINkwvvSOHhDaM_gi5GDdgcpVsQqM_3pXN" method="POST">
+          
           <div>
             <label>Name</label>
             <input type="text" name="FIRSTNAME" placeholder="Your Name" required />
@@ -360,58 +360,16 @@
             <label>Message</label>
             <textarea name="MESSAGE" rows="5" placeholder="Tell us about your project"></textarea>
           </div>
+          
+          <!-- Hidden fields required by Brevo -->
+          <input type="text" name="email_address_check" value="" style="display:none" />
+          <input type="hidden" name="locale" value="en" />
+          
           <div>
             <button type="submit" class="submit">Send Message</button>
           </div>
         </form>
       </div>
     </section>
-
-    <script>
-      // Reveal on scroll
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.style.opacity = 1;
-          }
-        });
-      }, { threshold: 0.25 });
-      document.querySelectorAll('h1, h2, .gradient-card, .hero-text, .hero-img, form').forEach(el => {
-        el.style.opacity = 0;
-        observer.observe(el);
-      });
-
-      // Brevo API form submission
-      document.getElementById('brevo-form').addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const data = {
-          updateEnabled: false,
-          email: e.target.EMAIL.value,
-          attributes: {
-            FIRSTNAME: e.target.FIRSTNAME.value,
-            PHONE: e.target.PHONE.value,
-            MESSAGE: e.target.MESSAGE.value
-          },
-          listIds: [3] // Your Brevo list ID
-        };
-
-        const response = await fetch("https://api.brevo.com/v3/contacts", {
-          method: "POST",
-          headers: {
-            "accept": "application/json",
-            "api-key": "YOUR_BREVO_API_KEY",
-            "content-type": "application/json"
-          },
-          body: JSON.stringify(data)
-        });
-
-        if (response.ok) {
-          window.location.href = "thank-you.html";
-        } else {
-          alert("Error submitting form. Please try again.");
-        }
-      });
-    </script>
   </body>
 </html>
