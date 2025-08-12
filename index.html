@@ -162,7 +162,6 @@
       .cards-2 {
         grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
       }
-      /* Page 3 specific 2×2 grid */
       #page3 .cards-2 {
         grid-template-columns: repeat(2, 1fr);
         gap: 30px;
@@ -181,22 +180,6 @@
         box-shadow: 0 35px 80px -5px rgba(241,194,125,0.25), inset 0 0 40px rgba(255,255,255,0.02);
         transition: transform .3s ease, box-shadow .3s ease;
         overflow: hidden;
-      }
-      .gradient-card::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at top left, rgba(241,194,125,0.15), transparent 60%);
-        mix-blend-mode: overlay;
-        pointer-events: none;
-      }
-      .gradient-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 45px 100px -5px rgba(241,194,125,.35), inset 0 0 50px rgba(255,255,255,0.04);
-      }
-      .subsection {
-        max-width: 900px;
-        margin: 0 auto;
       }
       .form-wrapper {
         max-width: 700px;
@@ -242,14 +225,6 @@
         filter: brightness(1.1);
         transform: translateY(-1px);
       }
-      @media (max-width: 1000px) {
-        h1 { font-size: 64px !important; }
-        h2 { font-size: 46px !important; }
-        h3 { font-size: 30px !important; }
-        p { font-size: 18px !important; }
-        .cards-2 { grid-template-columns: 1fr; }
-        .hero { flex-direction: column-reverse; }
-      }
     </style>
   </head>
   <body>
@@ -283,6 +258,7 @@
         </div>
       </div>
     </section>
+
     <!-- Page 2 -->
     <section class="section" id="page2">
       <div class="subsection text-center">
@@ -297,99 +273,54 @@
             <p>Finding good people is difficult, training them is expensive. Even if you find the perfect person... You still rely on one individual.</p>
           </div>
         </div>
-        <div class="gradient-card" style="margin:48px auto; max-width:850px;">
-          <h3>Hire an agency?</h3>
-          <p>Don't have a marketing budget of tens of thousands of rupees? Well then your account is managed by the intern assistant of the assistant. Not ideal.</p>
-        </div>
-        <div style="margin-top:24px;">
-          <a href="#contact" class="btn">Start Now</a>
-        </div>
       </div>
     </section>
 
-    <!-- Page 3 -->
-    <section class="section" id="page3">
-      <div class="subsection text-center">
-        <h2>Ok... But What Makes You Different?</h2>
-        <div class="cards cards-2" style="margin-top:32px;">
-          <div class="gradient-card">
-            <h3>Guaranteed</h3>
-            <p>We only win if you win. That's the basic of good partnership. You won't carry all the risk. We'll share it.</p>
-          </div>
-          <div class="gradient-card">
-            <h3>Result</h3>
-            <p>Our first priority is to get you results. Less talk more walk.</p>
-          </div>
-          <div class="gradient-card">
-            <h3>Local</h3>
-            <p>We are not tucked away in some anonymous call centre. We're a local company, so you'll be able to reach us when you need us.</p>
-          </div>
-          <div class="gradient-card">
-            <h3>Specialization</h3>
-            <p>Jack of all trades... Master of none. Specialization works. That's why we work with industries we know, so we can guarantee results.</p>
-          </div>
-        </div>
-        <div style="margin-top:24px;">
-          <a href="#contact" class="btn">Start Now</a>
-        </div>
-      </div>
-    </section>
-	    <!-- Contact -->
+    <!-- Contact -->
     <section class="section" id="contact">
       <div class="subsection text-center">
         <h2>Get A Free Marketing Analysis.</h2>
         <h3>Want to know what we can do for you?</h3>
-        <p>Fill out the form below and we will contact you within 48 hrs for a free analysis. No cost, no annoying sales pitch.</p>
+        <p>Fill out the form below and we will contact you within 48 hrs for a free analysis.</p>
       </div>
       <div class="form-wrapper" style="margin-top:16px;">
-       <div class="form-wrapper" style="margin-top:16px;">
-  <form id="contactForm" action="https://660405e6.sibforms.com/serve/MUIFACPJM3r0Fy9ScknYxZEx-sivDTLGp7XqePDUvzRgmMeXB2GJx8EPrgH98It8nuNpkikBA3KJJIF3kEPeAbiO97JDw49MrfB86aBzme1y5gEvOPdcf9xxtX0dto1AEG5CBfXPD4W-nv1RxKm9hS-pWXsx70rIV1Y936fzh_zAh9JINkwvvSOHhDaM_gi5GDdgcpVsQqM_3pXN" method="POST">
-    
-    <div>
-      <label>Name</label>
-      <input type="text" name="FIRSTNAME" placeholder="Your Name" required />
-    </div>
-    <div>
-      <label>Email</label>
-      <input type="email" name="EMAIL" placeholder="Your Email" required />
-    </div>
-    <div>
-      <label>Phone</label>
-      <input type="tel" name="SMS" placeholder="Your Phone Number" />
-    </div>
-    <div>
-      <label>Message</label>
-      <textarea name="MESSAGE" rows="5" placeholder="Tell us about your project"></textarea>
-    </div>
-    
-    <!-- Hidden fields required by Brevo -->
-    <input type="text" name="email_address_check" value="" style="display:none" />
-    <input type="hidden" name="locale" value="en" />
+        <form id="contactForm" action="https://660405e6.sibforms.com/serve/MUIFACPJM3r0Fy9ScknYxZEx-sivDTLGp7XqePDUvzRgmMeXB2GJx8EPrgH98It8nuNpkikBA3KJJIF3kEPeAbiO97JDw49MrfB86aBzme1y5gEvOPdcf9xxtX0dto1AEG5CBfXPD4W-nv1RxKm9hS-pWXsx70rIV1Y936fzh_zAh9JINkwvvSOHhDaM_gi5GDdgcpVsQqM_3pXN" method="POST" target="brevoFrame">
+          <div>
+            <label>Name</label>
+            <input type="text" name="FIRSTNAME" placeholder="Your Name" required />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" name="EMAIL" placeholder="Your Email" required />
+          </div>
+          <div>
+            <label>Phone</label>
+            <input type="tel" name="SMS" placeholder="Your Phone Number" />
+          </div>
+          <div>
+            <label>Message</label>
+            <textarea name="MESSAGE" rows="5" placeholder="Tell us about your project"></textarea>
+          </div>
 
-    <div>
-      <button type="submit" class="submit">Send Message</button>
-    </div>
-  </form>
-</div>
+          <input type="text" name="email_address_check" value="" style="display:none" />
+          <input type="hidden" name="locale" value="en" />
 
-<script>
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const form = e.target;
-  
-  fetch(form.action, {
-    method: form.method,
-    body: new FormData(form)
-  }).then(() => {
-    window.location.href = "thank-you.html"; // Redirect to your custom page
-  }).catch(err => {
-    alert("There was an error. Please try again.");
-    console.error(err);
-  });
-});
-</script>
+          <div>
+            <button type="submit" class="submit">Send Message</button>
+          </div>
+        </form>
 
+        <iframe name="brevoFrame" style="display:none;"></iframe>
+
+        <script>
+          document.getElementById('contactForm').addEventListener('submit', function() {
+            setTimeout(function() {
+              window.location.href = "thank-you.html";
+            }, 1000);
+          });
+        </script>
       </div>
     </section>
+
   </body>
 </html>
