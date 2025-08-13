@@ -343,28 +343,33 @@
 </section>
 
 <script>
-document.getElementById("contactForm").addEventListener("submit", function(e) {
+const scriptURL = 'https://script.google.com/macros/s/AKfycbzEeeDmqoj9kcir9ySPz8t22-WtdMwjQ4dkrq1G83tEf2jCPAqXP-kGAwTqCtax1cVu/exec';
+const form = document.getElementById('contactForm');
+
+form.addEventListener('submit', e => {
   e.preventDefault();
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycbyLBp-hACxvZj31SmiCkZxZWejSwwl9HeYD_xsdSe7WicFmOo4MokduMnDtT2hTtfst/exec";
-  const form = e.target;
   const formData = new FormData(form);
-  const formResponse = document.getElementById("formResponse");
 
-  fetch(scriptURL, { method: "POST", body: formData })
-    .then(response => response.text())
-    .then(text => {
-      formResponse.style.color = "lightgreen";
-      formResponse.textContent = "✅ Thank you for contacting us! We will get back to you soon.";
-      form.reset();
-    })
-    .catch(error => {
-      console.error("Error!", error.message);
-      formResponse.style.color = "lightcoral";
-      formResponse.textContent = "❌ Oops! Something went wrong. Please try again.";
-    });
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    if (response.ok) {
+      // Redirect to thank you page after success
+      window.location.href = 'thankyou.html';
+    } else {
+      throw new Error('Network error');
+    }
+  })
+  .catch(error => {
+    console.error('Error!', error);
+    alert('❌ Something went wrong. Try again.');
+  });
 });
 </script>
+
 
 </body>
 </html>
