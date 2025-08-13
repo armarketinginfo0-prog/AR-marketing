@@ -339,41 +339,35 @@
         </form>
 
         <script>
-          const form = document.getElementById('contactForm');
+const form = document.getElementById('contactForm');
+const responseMessage = document.createElement('div');
+responseMessage.style.marginTop = '20px';
+responseMessage.style.fontSize = '1.1em';
+form.parentNode.appendChild(responseMessage);
 
-          // Create a div to show response messages below the form
-          const responseMessage = document.createElement('div');
-          responseMessage.style.marginTop = '20px';
-          responseMessage.style.fontSize = '1.2em';
-          form.parentNode.appendChild(responseMessage);
+const scriptURL = 'https://script.google.com/macros/s/AKfycbyLBp-hACxvZj31SmiCkZxZWejSwwl9HeYD_xsdSe7WicFmOo4MokduMnDtT2hTtfst/exec'; // from Google Apps Script deploy
 
-          form.addEventListener('submit', function(e) {
-            e.preventDefault();
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-            const formData = new FormData(form);
-            const data = new URLSearchParams(formData);
+  const formData = new FormData(form);
 
-            fetch('https://script.google.com/macros/s/AKfycbx1hiUAa7d6U0XAWR--saz1NvzWb2t7QkMKrYWEw7mXsD5bvanQHTQDTBZ3g6z9Elq-/exec', {
-              method: 'POST',
-              body: data
-            })
-            .then(response => response.json())
-            .then(result => {
-              if (result.result === 'success') {
-                responseMessage.style.color = 'lightgreen';
-                responseMessage.textContent = 'Thank you for contacting us! We will get back to you soon.';
-                form.reset();
-              } else {
-                responseMessage.style.color = 'lightcoral';
-                responseMessage.textContent = 'Oops! Something went wrong. Please try again.';
-              }
-            })
-            .catch(() => {
-              responseMessage.style.color = 'lightcoral';
-              responseMessage.textContent = 'Oops! Something went wrong. Please try again.';
-            });
-          });
-        </script>
+  fetch(scriptURL, {
+    method: 'POST',
+    body: formData, // send as form data
+  })
+  .then(() => {
+    responseMessage.style.color = 'lightgreen';
+    responseMessage.textContent = 'Thank you for contacting us! We will get back to you soon.';
+    form.reset();
+  })
+  .catch(() => {
+    responseMessage.style.color = 'lightcoral';
+    responseMessage.textContent = 'Oops! Something went wrong. Please try again.';
+  });
+});
+</script>
+
       </div>
     </section>
 
