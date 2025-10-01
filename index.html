@@ -36,6 +36,7 @@
       align-items: center;
       gap: .5rem;
       font-weight: 700;
+      flex-shrink: 0; 
     }
     .logo img {
       height: 56px;
@@ -54,6 +55,7 @@
       list-style: none;
       margin: 0;
       padding: 0;
+      flex-shrink: 1; 
     }
     .nav-links a {
       text-decoration: none;
@@ -73,12 +75,13 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
     }
     .section {
-      padding: 100px 16px 60px;
+      /* Reduced spacing */
+      padding: 80px 16px 30px; 
       max-width: 1100px;
       margin: 0 auto;
     }
     h1 {
-      font-size: 85px !important;
+      font-size: 85px !important; /* Desktop size */
       margin: 0 0 16px;
       font-weight: 800;
       line-height: 1.05;
@@ -111,6 +114,57 @@
       margin: 0 0 14px;
       line-height: 1.4;
     }
+
+    /* === RE-ADDED: FINAL GLOWING DIVIDER STYLE (Sharp-Edged/Rounded Ends) === */
+    .gold-divider {
+      border: none;
+      height: 5px; /* Thicker middle */
+      /* Linear gradient for sharp color fade out on the ends */
+      background: linear-gradient(
+        to right, 
+        rgba(241, 194, 125, 0) 0%, /* Start transparent */
+        var(--gold) 10%, /* Fade in quickly */
+        var(--gold) 90%, /* Solid middle section */
+        rgba(241, 194, 125, 0) 100% /* Fade out quickly */
+      );
+      /* Large border-radius to create the sharp, rounded ends */
+      border-radius: 999px; 
+      
+      /* Intense glow */
+      box-shadow: 0 0 15px var(--gold), 0 0 20px rgba(241, 194, 125, 0.8); 
+      margin: 60px auto; 
+      width: 90%; 
+      max-width: 1000px;
+      opacity: 0.8; 
+    }
+    /* ====================================================== */
+    
+    /* === CSS Animation Definitions for Entrance Effect === */
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Base state: All elements start hidden and offset. */
+    .btn, .submit, .gradient-card {
+      opacity: 0; 
+      transform: translateY(20px);
+      transition: none; 
+    }
+
+    /* Target state: This class is added by JavaScript to trigger the animation. */
+    .btn.animate-in, .submit.animate-in, .gradient-card.animate-in {
+      animation: slideInUp 0.4s ease-out forwards; 
+      transition: transform .2s, filter .2s, box-shadow .3s ease, border-color .3s ease; 
+    }
+    /* ==================================================== */
+
     .btn {
       display: inline-block;
       background: var(--gold);
@@ -166,6 +220,33 @@
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
     }
+    /* === MOBILE OPTIMIZATION === */
+    @media (max-width: 768px) {
+      /* Increased space between logo and nav links */
+      .logo {
+        margin-right: 1.5rem; 
+      }
+      /* Reduced nav button size and gap */
+      .nav-links {
+        gap: 0.75rem; 
+      }
+      .nav-links a {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+      }
+      .logo img {
+        height: 40px;
+        width: 40px;
+      }
+      .logo span {
+        font-size: 1.25rem;
+      }
+      /* H1 size on the home page for mobile is now 73px */
+      #home h1 {
+        font-size: 73px !important; 
+      }
+    }
+    /* =============================== */
     @media (max-width: 600px) {
       #page3 .cards-2 {
         grid-template-columns: 1fr;
@@ -177,10 +258,18 @@
       border: 1px solid rgba(241,194,125,0.6);
       border-radius: 16px;
       padding: 32px 28px;
+      /* Only transition hover effects here, initial state is handled by the animation setup */
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; 
       box-shadow: 0 35px 80px -5px rgba(241,194,125,0.25), inset 0 0 40px rgba(255,255,255,0.02);
-      transition: transform .3s ease, box-shadow .3s ease;
       overflow: hidden;
     }
+    /* Hover effect for cards on Page 2 and Page 3 (All Views) */
+    .gradient-card:hover {
+      transform: translateY(-8px); 
+      border-color: var(--gold); 
+      box-shadow: 0 40px 90px -5px rgba(241,194,125,0.4), inset 0 0 50px rgba(255,255,255,0.05); 
+    }
+    
     .form-wrapper {
       max-width: 700px;
       margin: 0 auto;
@@ -229,7 +318,6 @@
 </head>
 <body>
 
-<!-- Navbar -->
 <nav>
   <div style="display:flex; align-items:center; justify-content:space-between; max-width:1100px; margin:0 auto; width:100%;">
     <div class="logo">
@@ -238,13 +326,12 @@
     </div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#contact">Contact Now</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- Page 1 -->
-    <section id="home" class="section">
+<section id="home" class="section">
       <div class="hero">
         <div class="hero-text">
           <h1>More growth.<br/>More clients.<br/>Guaranteed.</h1>
@@ -258,7 +345,9 @@
         </div>
       </div>
     </section>
-    <!-- Page 2 -->
+
+    <hr class="gold-divider" />
+    
     <section class="section" id="page2">
       <div class="subsection text-center">
         <h2>So How Do You Get The Most Out Of Your Marketing?</h2>
@@ -282,7 +371,8 @@
       </div>
     </section>
 
-    <!-- Page 3 -->
+    <hr class="gold-divider" />
+
     <section class="section" id="page3">
       <div class="subsection text-center">
         <h2>Ok... But What Makes You Different?</h2>
@@ -309,8 +399,10 @@
         </div>
       </div>
     </section>
-	<!-- Contact -->
-<section class="section" id="contact">
+
+    <hr class="gold-divider" />
+
+	<section class="section" id="contact">
   <div class="subsection text-center">
     <h2>Get A Free Marketing Analysis.</h2>
     <h3>Want to know what we can do for you?</h3>
@@ -367,6 +459,34 @@ form.addEventListener('submit', e => {
     console.error('Error!', error);
     alert('❌ Something went wrong. Try again.');
   });
+});
+
+// === JAVASCRIPT FOR SCROLL-TRIGGERED ANIMATION ===
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all elements that need the scroll-in effect (buttons AND cards)
+    const elementsToAnimate = document.querySelectorAll('.btn, .submit, .gradient-card');
+
+    const observerOptions = {
+        root: null, // relative to the viewport
+        rootMargin: '0px',
+        threshold: 0.1 // 10% of the element must be visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // When element enters viewport, add the class to trigger CSS animation
+                entry.target.classList.add('animate-in');
+                // Stop observing once the animation is triggered
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    elementsToAnimate.forEach(element => {
+        // Start observing each element (button or card)
+        observer.observe(element);
+    });
 });
 </script>
 
