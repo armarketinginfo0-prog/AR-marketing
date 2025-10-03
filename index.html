@@ -110,13 +110,32 @@
       font-weight: 600;
       color: var(--gold);
     }
-    /* === CARD HEADING ALIGNMENT FIX === */
+    
+    /* === CARD HEADING AND TEXT ALIGNMENT FIXES === */
+    /* Reduce H3 size slightly to promote single-line headings in cards */
     .gradient-card h3,
     .how-we-work-card h3,
     .comparison-card h3 {
+        font-size: 36px !important; /* Adjusted for single line consistency */
+        white-space: nowrap; /* Prevent wrapping (except on extremely small screens) */
+        overflow: hidden; /* Hide overflow if necessary */
+        text-overflow: ellipsis; /* Add ellipsis if needed */
         text-align: center !important; /* Explicitly center align all card headings */
     }
-    /* === END CARD HEADING ALIGNMENT FIX === */
+    
+    /* Center align paragraph text specifically in the gradient cards (Page 2 & 3) */
+    .gradient-card {
+      text-align: center;
+    }
+    .gradient-card p {
+      text-align: center;
+    }
+    
+    /* Keep list text in comparison card left-aligned, but center the heading */
+    .comparison-card {
+      text-align: left;
+    }
+    /* === END CARD ALIGNMENT FIXES === */
 
     p {
       font-size: 20px !important;
@@ -241,9 +260,7 @@
       /* Reverting general card alignment to default/inherited (which should be center in these sections) */
       text-align: initial; 
     }
-    .gradient-card p {
-      text-align: initial; /* Reverting general card paragraph alignment to default/inherited */
-    }
+    
     .gradient-card:hover {
       transform: translateY(-8px); 
       border-color: var(--gold); 
@@ -567,16 +584,16 @@
         <div class="cards cards-2" style="margin-top:32px;">
           <div class="gradient-card">
             <h3>Do everything by yourself?</h3>
-            <p>If you have little to do, it's not a problem. But you have your business to run, right?</p>
+            <p><br/>If you have little to do, it's not a problem. <br/><br/>But you have your business to run, <br/>right?</p>
           </div>
           <div class="gradient-card">
             <h3>Hiring new staff?</h3>
-            <p>Finding good people is difficult, training them is expensive. Even if you find the perfect person... You still rely on one individual.</p>
+            <p><br/>Finding good people is difficult, training them is expensive. <br/>Even if you find the perfect person... <br/>You still rely on one individual.</p>
           </div>
         </div>
         <div class="gradient-card" style="margin:48px auto; max-width:850px;">
           <h3>Hire an agency?</h3>
-          <p>Don't have a marketing budget of tens of thousands of rupees? Well then your account is managed by the intern assistant of the assistant. Not ideal.</p>
+          <p><br/>Don't have a marketing budget of tens of thousands of rupees? <br/>Well then your account is managed by the intern assistant of the assistant. <br/>Not ideal.</p>
         </div>
         <div style="margin-top:24px;">
           <a href="#contact" class="btn">Start Now</a>
@@ -593,19 +610,19 @@
         <div class="cards cards-2" style="margin-top:32px;">
           <div class="gradient-card">
             <h3>Guaranteed</h3>
-            <p>We only win if you win. That's the basic of good partnership. You won't carry all the risk. We'll share it.</p>
+            <p><br/>We only win if you win.<br/> That's the basic of good partnership. <br/><br/>You won't carry all the risk.<br/> We'll share it.</p>
           </div>
           <div class="gradient-card">
             <h3>Result</h3>
-            <p>Our first priority is to get you results. Less talk more walk.</p>
+            <p><br/>Our first priority is to get you results. <br/><br/>Less talk more walk.<br/></p>
           </div>
           <div class="gradient-card">
             <h3>Local</h3>
-            <p>We are not tucked away in some anonymous call centre. We're a local company, so you'll be able to reach us when you need us.</p>
+            <p><br/>We are not tucked away in some anonymous call centre.<br/>We're a local company, <br/>so you'll be able to reach us when you need us.</p>
           </div>
           <div class="gradient-card">
             <h3>Specialization</h3>
-            <p>Jack of all trades... Master of none. Specialization works. That's why we work with industries we know, so we can guarantee results.</p>
+            <p><br/>Jack of all trades... Master of none. Specialization works. <br/>That's why we work with industries we know, <br/>so we can guarantee results.</p>
           </div>
         </div>
         <div style="margin-top:24px;">
