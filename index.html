@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AR Marketing</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
   <style>
     :root {
       --gold: #F1C27D;
@@ -38,6 +39,7 @@
       font-weight: 700;
       flex-shrink: 0; 
     }
+    /* Logo image styles restored */
     .logo img {
       height: 56px;
       width: 56px;
@@ -75,7 +77,6 @@
       box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
     }
     .section {
-      /* Reduced spacing */
       padding: 80px 16px 30px; 
       max-width: 1100px;
       margin: 0 auto;
@@ -104,67 +105,60 @@
       margin: 14px auto 0;
     }
     h3 {
-      font-size: 42px !important;
+      font-size: 42px !important; /* Global h3 size restored */
       margin: 0 0 8px;
       font-weight: 600;
       color: var(--gold);
     }
+    /* === CARD HEADING ALIGNMENT FIX === */
+    .gradient-card h3,
+    .how-we-work-card h3,
+    .comparison-card h3 {
+        text-align: center !important; /* Explicitly center align all card headings */
+    }
+    /* === END CARD HEADING ALIGNMENT FIX === */
+
     p {
       font-size: 20px !important;
       margin: 0 0 14px;
       line-height: 1.4;
     }
 
-    /* === RE-ADDED: FINAL GLOWING DIVIDER STYLE (Sharp-Edged/Rounded Ends) === */
+    /* Gold Divider */
     .gold-divider {
       border: none;
-      height: 5px; /* Thicker middle */
-      /* Linear gradient for sharp color fade out on the ends */
+      height: 5px; 
       background: linear-gradient(
         to right, 
-        rgba(241, 194, 125, 0) 0%, /* Start transparent */
-        var(--gold) 10%, /* Fade in quickly */
-        var(--gold) 90%, /* Solid middle section */
-        rgba(241, 194, 125, 0) 100% /* Fade out quickly */
+        rgba(241, 194, 125, 0) 0%, 
+        var(--gold) 10%, 
+        var(--gold) 90%, 
+        rgba(241, 194, 125, 0) 100% 
       );
-      /* Large border-radius to create the sharp, rounded ends */
       border-radius: 999px; 
-      
-      /* Intense glow */
       box-shadow: 0 0 15px var(--gold), 0 0 20px rgba(241, 194, 125, 0.8); 
       margin: 60px auto; 
       width: 90%; 
       max-width: 1000px;
       opacity: 0.8; 
     }
-    /* ====================================================== */
     
-    /* === CSS Animation Definitions for Entrance Effect === */
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Base state: All elements start hidden and offset. */
-    .btn, .submit, .gradient-card {
-      opacity: 0; 
+    .btn, .submit, .gradient-card, .how-we-work-card, .comparison-card { 
+      opacity: 0; /* Start invisible */
       transform: translateY(20px);
       transition: none; 
     }
-
-    /* Target state: This class is added by JavaScript to trigger the animation. */
-    .btn.animate-in, .submit.animate-in, .gradient-card.animate-in {
-      animation: slideInUp 0.4s ease-out forwards; 
+    
+    .btn.animate-in, .submit.animate-in, .gradient-card.animate-in, .how-we-work-card.animate-in, .comparison-card.animate-in { 
+      animation: slideInUp 0.8s ease-out forwards; 
       transition: transform .2s, filter .2s, box-shadow .3s ease, border-color .3s ease; 
     }
-    /* ==================================================== */
 
+    @keyframes slideInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
     .btn {
       display: inline-block;
       background: var(--gold);
@@ -199,6 +193,16 @@
       border-radius: 16px;
       box-shadow: 0 30px 60px -10px rgba(241,194,125,.4);
       transition: transform .3s;
+      /* Restoring original image container styles */
+      min-height: auto; 
+      background: none; 
+      border: none;
+      display: block; 
+      align-items: initial;
+      justify-content: initial;
+      color: initial;
+      font-size: initial;
+      font-weight: initial;
     }
     .hero-img img {
       width: 100%;
@@ -216,54 +220,30 @@
     .cards-2 {
       grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
     }
-    #page3 .cards-2 {
+    #philosophy .cards-2 {
       grid-template-columns: repeat(2, 1fr);
       gap: 30px;
     }
-    /* === MOBILE OPTIMIZATION === */
-    @media (max-width: 768px) {
-      /* Increased space between logo and nav links */
-      .logo {
-        margin-right: 1.5rem; 
-      }
-      /* Reduced nav button size and gap */
-      .nav-links {
-        gap: 0.75rem; 
-      }
-      .nav-links a {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-      }
-      .logo img {
-        height: 40px;
-        width: 40px;
-      }
-      .logo span {
-        font-size: 1.25rem;
-      }
-      /* H1 size on the home page for mobile is now 73px */
-      #home h1 {
-        font-size: 73px !important; 
-      }
-    }
-    /* =============================== */
-    @media (max-width: 600px) {
-      #page3 .cards-2 {
-        grid-template-columns: 1fr;
-      }
-    }
+    
     .gradient-card {
       position: relative;
       background: linear-gradient(135deg, rgba(241,194,125,0.08) 0%, rgba(28,28,28,0.85) 80%);
       border: 1px solid rgba(241,194,125,0.6);
       border-radius: 16px;
       padding: 32px 28px;
-      /* Only transition hover effects here, initial state is handled by the animation setup */
       transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; 
       box-shadow: 0 35px 80px -5px rgba(241,194,125,0.25), inset 0 0 40px rgba(255,255,255,0.02);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px; 
+      /* Reverting general card alignment to default/inherited (which should be center in these sections) */
+      text-align: initial; 
     }
-    /* Hover effect for cards on Page 2 and Page 3 (All Views) */
+    .gradient-card p {
+      text-align: initial; /* Reverting general card paragraph alignment to default/inherited */
+    }
     .gradient-card:hover {
       transform: translateY(-8px); 
       border-color: var(--gold); 
@@ -314,6 +294,235 @@
       filter: brightness(1.1);
       transform: translateY(-1px);
     }
+
+    /* === STYLES FOR #how-we-work SECTION === */
+    #how-we-work {
+      background-color: var(--bg); 
+      color: #fff;
+      padding-top: 100px;
+      padding-bottom: 100px;
+    }
+    #how-we-work .subsection {
+      text-align: center;
+    }
+    #how-we-work h2 {
+      font-family: inherit;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 60px !important; 
+      color: var(--gold); 
+      margin-bottom: 50px; 
+    }
+    #how-we-work h2::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 3px;
+        margin: 14px auto 0;
+    }
+    #how-we-work .label {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: inline-block;
+      background: rgba(241, 194, 125, 0.1); 
+      padding: 8px 15px;
+      border-radius: 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      color: var(--gold); 
+      border: 1px solid rgba(241, 194, 125, 0.3);
+    }
+    .how-we-work-cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center; 
+      gap: 30px;
+      margin-top: 40px;
+      position: relative;
+    }
+    .how-we-work-card {
+      background: linear-gradient(135deg, rgba(241,194,125,0.05) 0%, rgba(28,28,28,0.85) 80%);
+      border: 1px solid rgba(241,194,125,0.6);
+      border-radius: 16px;
+      padding: 30px;
+      /* --- ALIGNMENT FIX: Keep text centered for this section as intended by design (icon + text) --- */
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      flex: 1 1 280px; 
+      max-width: 330px; 
+      position: relative;
+      z-index: 1;
+      color: #fff; 
+      transition: transform .3s ease; 
+    }
+    .how-we-work-card:hover {
+        transform: translateY(-8px); 
+        border-color: var(--gold); 
+        box-shadow: 0 10px 25px rgba(241,194,125,0.3); 
+    }
+    .how-we-work-card h3 {
+      font-size: 24px !important; /* Restoring explicit smaller size for How We Work cards */
+      font-weight: 700;
+      margin: 15px 0 10px;
+      color: var(--gold); 
+    }
+    .how-we-work-card p {
+      font-size: 16px !important; 
+      line-height: 1.5;
+      color: #ccc; 
+    }
+    .how-we-work-card .icon-circle {
+      width: 80px;
+      height: 80px;
+      background-color: var(--gold); 
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+      font-size: 35px; 
+      color: var(--bg); 
+    }
+    .how-we-work-cards-container::before,
+    .how-we-work-cards-container::after {
+      content: '';
+      position: absolute;
+      top: 100px; 
+      height: 2px;
+      background: rgba(241, 194, 125, 0.4); 
+      z-index: 0;
+      display: none; 
+    }
+    .how-we-work-cards-container::before { left: 17%; right: 50%; }
+    .how-we-work-cards-container::after { left: 50%; right: 17%; }
+    
+    /* === STYLES FOR #why-us SECTION (Comparison) === */
+    #why-us {
+        background-color: var(--bg);
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+    #why-us .header-label {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        display: inline-block;
+        background: rgba(241, 194, 125, 0.1); 
+        padding: 8px 15px;
+        border-radius: 20px;
+        color: var(--gold); 
+        border: 1px solid rgba(241, 194, 125, 0.3);
+    }
+    #why-us .comparison-heading {
+        font-size: 60px !important; 
+        font-weight: 700; 
+        line-height: 1.05; 
+        color: var(--gold); 
+        position: relative;
+        margin-bottom: 50px; 
+    }
+    #why-us .comparison-heading::after {
+        content: '';
+        display: block;
+        width: 80px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 3px;
+        margin: 14px auto 0;
+    }
+
+    #why-us .comparison-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+    }
+    .comparison-card {
+        background: #1a1a25; 
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        flex: 1 1 45%; 
+        max-width: 480px;
+        color: #fff;
+        min-height: 400px;
+        /* Keeping comparison card content left-aligned for list appearance */
+        text-align: left; 
+    }
+    .comparison-card h3 {
+        font-size: 36px !important; /* Restore comparison heading size */
+        font-weight: 600;
+        margin: 0 0 30px;
+        text-align: center; /* Keep the comparison headings centered for aesthetics */
+    }
+    .comparison-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    .comparison-card li {
+        display: flex;
+        align-items: flex-start;
+        font-size: 18px;
+        margin-bottom: 20px;
+        line-height: 1.4;
+    }
+    .comparison-card .icon-mark {
+        margin-right: 15px;
+        font-size: 20px;
+        line-height: 1;
+        flex-shrink: 0;
+        padding-top: 3px;
+    }
+    .comparison-card.agencies h3 {
+        color: #999; 
+    }
+    .comparison-card.agencies .icon-mark {
+        color: #e88d8d; 
+    }
+    .comparison-card.armarketing h3 {
+        color: var(--gold); 
+    }
+    .comparison-card.armarketing .icon-mark {
+        color: #8de8a3; 
+    }
+
+    /* Media queries for responsiveness */
+    @media (min-width: 900px) { 
+      .how-we-work-cards-container::before,
+      .how-we-work-cards-container::after {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .logo { margin-right: 1.5rem; }
+      .nav-links { gap: 0.75rem; }
+      .nav-links a { font-size: 0.9rem; padding: 6px 12px; }
+      .logo img { height: 40px; width: 40px; } /* Updated for mobile image size */
+      .logo span { font-size: 1.25rem; }
+      #home h1 { font-size: 73px !important; }
+      
+      #how-we-work h2 { font-size: 45px !important; }
+      #why-us .comparison-heading { font-size: 45px !important; margin-bottom: 30px; }
+
+
+      .how-we-work-card { flex: 1 1 100%; max-width: 90%; }
+      .how-we-work-cards-container { flex-direction: column; align-items: center; margin-top: 20px; }
+
+      .comparison-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+        min-height: auto;
+      }
+    }
+    @media (max-width: 600px) {
+      .cards-2 {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -325,7 +534,9 @@
       <span>AR Marketing</span>
     </div>
     <ul class="nav-links">
+      <!-- Streamlined Navigation Links -->
       <li><a href="#home">Home</a></li>
+      <li><a href="#philosophy">About us</a></li> 
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -337,18 +548,20 @@
           <h1>More growth.<br/>More clients.<br/>Guaranteed.</h1>
           <p style="margin-top:8px;">You do what you are best at, we will handle the marketing.</p>
           <div style="margin-top:16px;">
-            <a href="#contact" class="btn">Start Now</a>
+            <!-- Button on the home page will now have a 0.8s delay -->
+            <a href="#contact" class="btn" id="home-btn">Start Now</a>
           </div>
         </div>
         <div class="hero-img">
           <img src="hero-image.jpg.png" alt="Hero Image" loading="lazy" />
         </div>
       </div>
-    </section>
+</section>
 
-    <hr class="gold-divider" />
-    
-    <section class="section" id="page2">
+<hr class="gold-divider" />
+
+<!-- START PAGE 2 CONTENT: Retained content -->
+<section class="section" id="the-conundrum">
       <div class="subsection text-center">
         <h2>So How Do You Get The Most Out Of Your Marketing?</h2>
         <div class="cards cards-2" style="margin-top:32px;">
@@ -357,7 +570,7 @@
             <p>If you have little to do, it's not a problem. But you have your business to run, right?</p>
           </div>
           <div class="gradient-card">
-            <h3>Hire new staff?</h3>
+            <h3>Hiring new staff?</h3>
             <p>Finding good people is difficult, training them is expensive. Even if you find the perfect person... You still rely on one individual.</p>
           </div>
         </div>
@@ -369,11 +582,12 @@
           <a href="#contact" class="btn">Start Now</a>
         </div>
       </div>
-    </section>
+</section>
+<hr class="gold-divider" />
+<!-- END PAGE 2 CONTENT -->
 
-    <hr class="gold-divider" />
-
-    <section class="section" id="page3">
+<!-- START PAGE 3 CONTENT: Labeled as 'About us' section in navigation -->
+<section id="philosophy" class="section">
       <div class="subsection text-center">
         <h2>Ok... But What Makes You Different?</h2>
         <div class="cards cards-2" style="margin-top:32px;">
@@ -395,14 +609,87 @@
           </div>
         </div>
         <div style="margin-top:24px;">
-          <a href="#contact" class="btn">Start Now</a>
+          <a href="#contact" class="btn">Talk Strategy</a>
         </div>
       </div>
-    </section>
+</section>
 
-    <hr class="gold-divider" />
+<hr class="gold-divider" />
+<!-- END PAGE 3 CONTENT -->
 
-	<section class="section" id="contact">
+<section id="how-we-work" class="section">
+      <div class="subsection">
+        <span class="label">How we work</span>
+        <h2>It's Straightforward</h2>
+        <div class="how-we-work-cards-container">
+          <div class="how-we-work-card">
+            <div class="icon-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 22h20L12 2zm0 10l-4 8h8l-4-8z"/></svg>
+            </div>
+            <h3>Plan Your Success</h3>
+            <p>We figure out who your customers are and what they want to hear before we start</p>
+          </div>
+          <div class="how-we-work-card">
+            <div class="icon-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-8L4 8v14h14l6-6V2zm-2 16H8v-8h8v8z"/></svg>
+            </div>
+            <h3>Handle Everything Daily</h3>
+            <p>We create ads, schedule them, and manage all your campaigns so you don't have to</p>
+          </div>
+          <div class="how-we-work-card">
+            <div class="icon-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"><path d="M22 10.95c0-1.87-1.46-3.41-3.32-3.62L17 7.23V4h-2V2H9v2H7v3.23l-1.68.09C3.46 7.54 2 9.08 2 10.95v1.1c0 1.87 1.46 3.41 3.32 3.62L7 16.77V20h2v2h6v-2h2v-3.23l1.68-.09C20.54 15.44 22 13.9 22 12.05v-1.1zm-4.32-.23l-2.07-.12-1.28-1.74-.75-.07-.75.07-1.28 1.74-2.07.12-.07.75 1.74 1.28.12 2.07.07.75-.07-.75-2.07-.12-1.74-1.28.75.07z"/></svg>
+            </div>
+            <h3>Track What Works</h3>
+            <p>We see which posts bring in customers and do more of what's working</p>
+          </div>
+        </div>
+        <div style="margin-top:40px; text-align:center;">
+          <a href="#contact" class="btn">Start Now</a>
+        </div>
+        </div>
+</section>
+<hr class="gold-divider" />
+
+<section id="why-us" class="section">
+    <div class="subsection text-center">
+        <span class="header-label">The difference</span>
+        <h2 class="comparison-heading">Why choose AR Marketing over everyone else?</h2>
+        
+        <div class="comparison-container">
+            <div class="comparison-card agencies comparison-card">
+                <h3>Other Agencies</h3>
+                <ul>
+                    <li><span class="icon-mark">✖</span> Generic content templates</li>
+                    <li><span class="icon-mark">✖</span> Monthly reporting only</li>
+                    <li><span class="icon-mark">✖</span> Separate teams for different platforms</li>
+                    <li><span class="icon-mark">✖</span> Long-term contracts required</li>
+                    <li><span class="icon-mark">✖</span> One-size-fits-all approach</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card armarketing comparison-card">
+                <h3 style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="currentColor" style="color:var(--gold);"><path d="M12 3a6 6 0 0 0-6 6v3h12V9a6 6 0 0 0-6-6zm0 13c-2.21 0-4-1.79-4-4V9a4 4 0 0 1 8 0v3c0 2.21-1.79 4-4 4zm-4 4h8v2H8z"/></svg>
+                    AR Marketing
+                </h3>
+                <ul>
+                    <li><span class="icon-mark">✔</span> If it doesn't work, we refund you</li>
+                    <li><span class="icon-mark">✔</span> Start small and see if we're a good fit</li>
+                    <li><span class="icon-mark">✔</span> Facebook, Instagram, Google, we cover it all</li>
+                    <li><span class="icon-mark">✔</span> Stay flexible - no long-term commitments required</li>
+                    <li><span class="icon-mark">✔</span> Regular calls to review what's working</li>
+                </ul>
+            </div>
+        </div>
+        <div style="margin-top:60px; text-align:center;">
+          <a href="#contact" class="btn">Start Now</a>
+        </div>
+        </div>
+</section>
+<hr class="gold-divider" />
+
+<section class="section" id="contact">
   <div class="subsection text-center">
     <h2>Get A Free Marketing Analysis.</h2>
     <h3>Want to know what we can do for you?</h3>
@@ -438,6 +725,8 @@
 const scriptURL = 'https://script.google.com/macros/s/AKfycbzEeeDmqoj9kcir9ySPz8t22-WtdMwjQ4dkrq1G83tEf2jCPAqXP-kGAwTqCtax1cVu/exec';
 const form = document.getElementById('contactForm');
 
+// NOTE: Maintaining original script structure for functionality consistency.
+
 form.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -457,14 +746,18 @@ form.addEventListener('submit', e => {
   })
   .catch(error => {
     console.error('Error!', error);
-    alert('❌ Something went wrong. Try again.');
+    // Replaced alert() with console error as per constraints
+    // If a custom modal/message box was available, it would be used here.
   });
 });
 
 // === JAVASCRIPT FOR SCROLL-TRIGGERED ANIMATION ===
 document.addEventListener('DOMContentLoaded', () => {
-    // Select all elements that need the scroll-in effect (buttons AND cards)
-    const elementsToAnimate = document.querySelectorAll('.btn, .submit, .gradient-card');
+    // Select all elements that need the scroll-in effect
+    const elementsToAnimate = document.querySelectorAll('.btn, .submit, .gradient-card, .how-we-work-card, .comparison-card');
+
+    // List of section IDs where elements should NOT have the default scroll delay
+    const instantSections = []; // Removed 'home' here to allow logic below to handle the delay
 
     const observerOptions = {
         root: null, // relative to the viewport
@@ -474,17 +767,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
+            const element = entry.target;
+            const parentSection = element.closest('section');
+            const isHome = parentSection && parentSection.id === 'home';
+            
             if (entry.isIntersecting) {
-                // When element enters viewport, add the class to trigger CSS animation
-                entry.target.classList.add('animate-in');
-                // Stop observing once the animation is triggered
-                observer.unobserve(entry.target);
+                let delay;
+                
+                // 1. Home Page Button Delay (0.8s)
+                if (isHome && (element.classList.contains('btn') || element.classList.contains('submit'))) {
+                    delay = '0.8s'; 
+                } 
+                // 2. All other buttons (0.5s)
+                else if (element.classList.contains('btn') || element.classList.contains('submit')) {
+                    delay = '0.5s'; 
+                }
+                // 3. All cards (0.3s)
+                else {
+                    delay = '0.3s'; 
+                }
+
+                element.style.animationDelay = delay; 
+                element.classList.add('animate-in');
+                observer.unobserve(element);
+            }
+            // For elements that are already in view on load, animate them
+            if (entry.intersectionRatio > 0) {
+                let delay;
+                const isHome = parentSection && parentSection.id === 'home';
+
+                if (isHome && (element.classList.contains('btn') || element.classList.contains('submit'))) {
+                    delay = '0.8s'; 
+                } else if (element.classList.contains('btn') || element.classList.contains('submit')) {
+                    delay = '0.5s';
+                } else {
+                    delay = '0.3s'; 
+                }
+                
+                element.style.animationDelay = delay; 
+                element.classList.add('animate-in');
+                observer.unobserve(element);
             }
         });
     }, observerOptions);
 
+    // Apply animation to all observed elements
     elementsToAnimate.forEach(element => {
-        // Start observing each element (button or card)
         observer.observe(element);
     });
 });
